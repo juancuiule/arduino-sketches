@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		ul {
+			list-style:none;
+			padding: 0px;
+			margin: 0px;
+		}
+		li {
+			width:30px;
+			height:30px;
+			background-color: grey;
+			display: inline-block;
+			padding: 0px;
+			margin: 0px;
+		}
+		input {
+			width: 400px;
+		}
+		.matrix {
+			-webkit-touch-callout: none; /* iOS Safari */
+		  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+		  -khtml-user-select: none;    /* Konqueror */
+		  -moz-user-select: none;      /* Firefox */
+		  -ms-user-select: none;       /* Internet Explorer/Edge */
+		  user-select: none;
+		}
+		</style>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+		<script>
+
+		var row0 = [0,0,0,0,0,0,0,0];
+		var row1 = [0,0,0,0,0,0,0,0];
+		var row2 = [0,0,0,0,0,0,0,0];
+		var row3 = [0,0,0,0,0,0,0,0];
+		var row4 = [0,0,0,0,0,0,0,0];
+		var row5 = [0,0,0,0,0,0,0,0];
+		var row6 = [0,0,0,0,0,0,0,0];
+		var row7 = [0,0,0,0,0,0,0,0];
+
+		$(function(){
+			$( "li" ).each(function( index ) {
+				let toogle = false;
+			  $( this ).click(function(){
+					if (!toogle) {
+						$( this ).css("background-color","red");
+						console.log("A rojo");
+						toogle = true;
+					} else if (toogle) {
+						$( this ).css("background-color","grey");
+						console.log("A gris");
+						toogle = false;
+					}
+				})
+			});
+		})
+
+		function get(){
+
+			$('#row0 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row0[index] = 0;
+				} else {
+					row0[index] = 1;
+				}
+			})
+			$('#row1 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row1[index] = 0;
+				} else {
+					row1[index] = 1;
+				}
+			})
+			$('#row2 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row2[index] = 0;
+				} else {
+					row2[index] = 1;
+				}
+			})
+			$('#row3 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row3[index] = 0;
+				} else {
+					row3[index] = 1;
+				}
+			})
+			$('#row4 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row4[index] = 0;
+				} else {
+					row4[index] = 1;
+				}
+			})
+			$('#row5 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row5[index] = 0;
+				} else {
+					row5[index] = 1;
+				}
+			})
+			$('#row6 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row6[index] = 0;
+				} else {
+					row6[index] = 1;
+				}
+			})
+			$('#row7 ul li').each(function( index ) {
+				let color = $( this ).css("background-color");
+				if (color==='rgb(128, 128, 128)') {
+					row7[index] = 0;
+				} else {
+					row7[index] = 1;
+				}
+			})
+
+			let row0_hex = "0x"+parseInt(row0.join(""),2).toString(16).toUpperCase();
+			let row1_hex = "0x"+parseInt(row1.join(""),2).toString(16).toUpperCase();
+			let row2_hex = "0x"+parseInt(row2.join(""),2).toString(16).toUpperCase();
+			let row3_hex = "0x"+parseInt(row3.join(""),2).toString(16).toUpperCase();
+			let row4_hex = "0x"+parseInt(row4.join(""),2).toString(16).toUpperCase();
+			let row5_hex = "0x"+parseInt(row5.join(""),2).toString(16).toUpperCase();
+			let row6_hex = "0x"+parseInt(row6.join(""),2).toString(16).toUpperCase();
+			let row7_hex = "0x"+parseInt(row7.join(""),2).toString(16).toUpperCase();
+
+			let matrix = [row0_hex,row1_hex,row2_hex,row3_hex,row4_hex,row5_hex,row6_hex,row7_hex,]
+
+			$('input').val("{"+matrix+"};");
+			copyToClipboard(document.getElementById("copyTarget"));
+		};
+
+		function clear_all(){
+			$( 'li' ).css("background-color","grey");
+			$( "li" ).each(function( index ) {
+				let toogle = false;
+			  $( this ).click(function(){
+					if (!toogle) {
+						$( this ).css("background-color","red");
+						toogle = true;
+					} else if (toogle) {
+						$( this ).css("background-color","grey");
+						toogle = false;
+					}
+				});
+			});
+		};
+
+		function fill_all(){
+			$( 'li' ).css("background-color","red");
+			$( "li" ).each(function( index ) {
+				let toogle = true;
+			  $( this ).click(function(){
+					if (!toogle) {
+						$( this ).css("background-color","red");
+						toogle = true;
+					} else if (toogle) {
+						$( this ).css("background-color","grey");
+						toogle = false;
+					};
+				});
+			});
+		};
+
+		function copyToClipboard(elem) {
+			  // create hidden text element, if it doesn't already exist
+		    var targetId = "_hiddenCopyText_";
+		    var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+		    var origSelectionStart, origSelectionEnd;
+		    if (isInput) {
+		        // can just use the original source element for the selection and copy
+		        target = elem;
+		        origSelectionStart = elem.selectionStart;
+		        origSelectionEnd = elem.selectionEnd;
+		    } else {
+		        // must use a temporary form element for the selection and copy
+		        target = document.getElementById(targetId);
+		        if (!target) {
+		            var target = document.createElement("textarea");
+		            target.style.position = "absolute";
+		            target.style.left = "-9999px";
+		            target.style.top = "0";
+		            target.id = targetId;
+		            document.body.appendChild(target);
+		        }
+		        target.textContent = elem.textContent;
+		    }
+		    // select the content
+		    var currentFocus = document.activeElement;
+		    target.focus();
+		    target.setSelectionRange(0, target.value.length);
+
+		    // copy the selection
+		    var succeed;
+		    try {
+		    	  succeed = document.execCommand("copy");
+		    } catch(e) {
+		        succeed = false;
+		    }
+		    // restore original focus
+		    if (currentFocus && typeof currentFocus.focus === "function") {
+		        currentFocus.focus();
+		    }
+
+		    if (isInput) {
+		        // restore prior selection
+		        elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+		    } else {
+		        // clear temporary content
+		        target.textContent = "";
+		    }
+		    return succeed;
+		}
+
+		</script>
+	</head>
+	<body>
+		<div class='matrix'>
+			<div id='row0'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row1'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row2'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row3'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row4'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row5'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row6'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id='row7'>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		<button type="text" id="copyButton" onclick="get()">Get</button>
+		<button type="text" onclick="clear_all()">Clear All</button>
+		<button type="text" onclick="fill_all()">Fill All</button>
+		<input type="text" id="copyTarget">
+	</body>
+</html>
