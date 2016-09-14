@@ -13,11 +13,12 @@ void loop() {
   vol = analogRead(potPin);
   analogWrite(speakerPin, vol);
 }*/
-     int speakerPin = 13;
-  
-     int numTones = 10;
-     int tones[ ] = {261, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494};
-                   //mid   C    C#   D    D#    E   F     F#   G   G#   A
+#include "notas.h"
+int speakerPin = 8;
+
+int tones[ ] = {NOTE_C5, NOTE_E5, NOTE_C5, NOTE_G5, NOTE_G5, NOTE_F5, NOTE_B5, NOTE_B5, NOTE_B5, NOTE_B5, NOTE_C5, NOTE_D5, NOTE_C5};
+int duraciones[ ] = {1000, 750, 250, 1000, 500, 500, 1000, 1000, 1500, 250, 250, 1000, 1000};
+             //mid   C    C#   D    D#    E   F     F#   G   G#   A
 
 // Do   mi   do    sol   sol   fa   si   si   si   si   do   re   do
 //  1   0.75 0.25  1      0.5  0.5  1    1    1.5  0.25 0.25 1    1
@@ -25,39 +26,22 @@ void loop() {
 
 void tocarHimno()
 {
-  tone(speakerPin, Do);
-  delay(100);
-  tone(speakerPin, Mi);
-  delay(75);
-  tone(speakerPin, Do);
-  delay(25);
-  tone(speakerPin, Sol);
-  delay(100);
-  tone(speakerPin, Sol);
-  delay(50);
-  tone(speakerPin, Fa);
-  delay(50);
-  tone(speakerPin, Si);
-  delay(100);
-  tone(speakerPin, Si);
-  delay(100);
-  tone(speakerPin, Si);
-  delay(150);
-  tone(speakerPin, Si);
-  delay(25);
-  tone(speakerPin, Do);
-  delay(0.25);
-  tone(speakerPin, Re);
-  delay(100);
-  tone(speakerPin, Do);
-  delay(100);
+  for( int i = 0; i < 13; i++){
+    tone(speakerPin, tones[i], duraciones[i]);
+    delay(1+duraciones[i]);
+    if(i > 7 && i < 10) {
+      noTone(speakerPin);
+      delay(10);
+    }
+  };
 };
 
-void setup() { }
+void setup()
+{
+  tocarHimno();  
+  noTone(speakerPin);
+}
 
 void loop()
 {
-  tocarHimno();
-  delay(2000);
-  noTone(speakerPin);
 }
